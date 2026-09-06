@@ -7,6 +7,8 @@ import { FaCircleChevronRight } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import FoodCard from "./FoodCard";
 import { useNavigate } from "react-router-dom";
+import AppDownload from "./AppDownload/AppDownload";
+import Footer from "./Footer/Footer";
 // import axios from "axios";
 // import { serverUrl } from "../App";
 
@@ -148,6 +150,9 @@ const UserDashboard = () => {
 
 
       </div>
+
+      <AppDownload/>
+      <Footer/>
 
 
     </div>

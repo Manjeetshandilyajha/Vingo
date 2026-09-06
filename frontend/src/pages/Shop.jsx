@@ -7,6 +7,8 @@ import { FaLocationDot } from "react-icons/fa6";
 import { FaUtensils } from "react-icons/fa";
 import FoodCard from "../components/FoodCard";
 import { FaArrowLeft } from "react-icons/fa";
+import AppDownload from "../components/AppDownload/AppDownload";
+import Footer from "../components/Footer/Footer";
 const Shop = () => {
   const { shopId } = useParams();
   const [items, setItems] = useState([]);
@@ -56,7 +58,8 @@ const Shop = () => {
           ):<p className="text-center text-gray-500 text-lg">No Items Available</p>}
         </div>
 
-
+          <AppDownload/>
+          <Footer/>
 
     </div>
   );
