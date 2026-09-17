@@ -42,18 +42,43 @@ export const getMyShop = async (req, res) => {
   }
 }
 
+// export const getShopByCity = async (req, res) => {
+//   try {
+//     const {city} = req.params
+
+//     const shops = await Shop.find({
+//       city : {$regex : new RegExp(`^${city}$`, "i")}
+//     }).populate('items')
+//     if (!shops) {
+//       return res.status(400).json({ message: 'shops not found' })
+//     }
+//     return res.status(200).json(shops)
+//   } catch (error) {
+//     return res.status(500).json({ message: `get shop by city error ${error}` })
+//   }
+// }
+
 export const getShopByCity = async (req, res) => {
   try {
-    const {city} = req.params
+    const { city } = req.params;
 
-    const shops = await Shop.find({
-      city : {$regex : new RegExp(`^${city}$`, "i")}
-    }).populate('items')
-    if (!shops) {
-      return res.status(400).json({ message: 'shops not found' })
+    // First: try exact city match
+    let shops = await Shop.find({
+      city: { $regex: new RegExp(`^${city}$`, "i") }
+    }).populate("items");
+
+    // If no shops found in that city,
+    // fallback to all shops available in India
+    if (shops.length === 0) {
+      shops = await Shop.find({})
+        .populate("items");
     }
-    return res.status(200).json(shops)
+
+    return res.status(200).json(shops);
+
   } catch (error) {
-    return res.status(500).json({ message: `get shop by city error ${error}` })
+    return res.status(500).json({
+      message: `get shop by city error ${error}`
+    });
   }
-}
+};
